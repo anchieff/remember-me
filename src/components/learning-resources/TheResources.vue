@@ -39,7 +39,8 @@
         },
         provide() {
             return {
-                resources: this.storedResources
+                resources: this.storedResources,
+                addResource: this.addResource
             }
         },
         computed: {
@@ -53,6 +54,16 @@
         methods: {
             setSelectedTab(tab) {
                 this.selectedTab = tab
+            },
+            addResource(title, description, link) {
+                const newResource = {
+                    id: new Date().toISOString(),
+                    title: title,
+                    description: description,
+                    link: link
+                }
+                this.storedResources.unshift(newResource)
+                this.selectedTab = 'stored-resource'
             }
         }
     }
